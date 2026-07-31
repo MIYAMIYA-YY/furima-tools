@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta name="google-site-verification" content="ZwCkQ40ldHqCyL-Cjll7Zpo_aFUj-XyopUlBc_vMmoY">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#e93567">
+  <meta name="description" content="販売価格、仕入れ値、販売手数料、フリマごとの送料から予想利益を簡単に計算できる無料ツールです。">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://furima-profit-calculator.netlify.app/profit/">
+  <title>フリマ利益計算｜メルカリ・ラクマ・Yahoo!フリマ対応</title>
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-9B8673RD4H"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-9B8673RD4H');</script>
+</head>
+<body>
+<header class="site-header"><div class="header-inner"><a class="site-brand" href="/">フリマ便利ツール</a><nav class="site-nav" aria-label="主要メニュー"><a href="/">ホーム</a><a href="/profit/" aria-current="page">利益計算</a><a href="/shipping/">送料一覧</a><a href="/about/">サイト情報</a></nav></div></header>
+<main class="app">
+  <header class="header">
+    <h1>フリマ利益計算</h1>
+    <p>利用するフリマを選ぶと、そのフリマに対応した配送方法と送料へ切り替わります。</p>
+  </header>
+
+  <section class="card">
+    <div class="field">
+      <label for="marketplace">利用するフリマ</label>
+      <select id="marketplace" class="standard-select"></select>
+    </div>
+
+    <div class="field">
+      <label for="salePrice">販売価格</label>
+      <div class="input-wrap"><input id="salePrice" type="number" inputmode="numeric" min="0" step="1" placeholder="例：3000"><span class="unit">円</span></div>
+    </div>
+
+    <div class="field">
+      <label for="costPrice">仕入れ値</label>
+      <div class="input-wrap"><input id="costPrice" type="number" inputmode="numeric" min="0" step="1" placeholder="例：1000"><span class="unit">円</span></div>
+    </div>
+
+    <div class="field">
+      <label for="feeRate">販売手数料 <span class="hint">初期値10%</span></label>
+      <div class="input-wrap"><input id="feeRate" type="number" inputmode="decimal" min="0" max="100" step="0.1" value="10"><span class="unit">%</span></div>
+    </div>
+
+    <div class="field">
+      <label for="shippingMethod">配送方法と料金</label>
+      <select id="shippingMethod" class="standard-select"></select>
+    </div>
+
+    <div class="field">
+      <label for="shippingCost">配送料 <span class="hint">その他を選んだ場合のみ手入力</span></label>
+      <div class="input-wrap"><input id="shippingCost" type="number" inputmode="numeric" min="0" step="1" value="0" disabled><span class="unit">円</span></div>
+    </div>
+
+    <div class="field">
+      <label for="otherCost">その他費用 <span class="hint">箱代・梱包材など</span></label>
+      <div class="input-wrap"><input id="otherCost" type="number" inputmode="numeric" min="0" step="1" value="0" placeholder="例：100"><span class="unit">円</span></div>
+    </div>
+  </section>
+
+  <section class="card result">
+    <div class="profit-label">予想利益</div>
+    <div id="profit" class="profit">0円</div>
+    <div id="marginText" class="margin-text">利益率 0.0%</div>
+    <div class="breakdown">
+      <div class="row"><span>販売手数料</span><strong id="feeAmount">0円</strong></div>
+      <div class="row"><span>配送料</span><strong id="shippingAmount">0円</strong></div>
+      <div class="row"><span>その他費用</span><strong id="otherCostAmount">0円</strong></div>
+      <div class="row"><span>合計コスト</span><strong id="totalCost">0円</strong></div>
+    </div>
+  </section>
+
+  <button id="resetButton" class="reset" type="button">入力をリセット</button>
+  <section class="ad" aria-label="広告"><div>広告<small>AdSense承認後に表示されます</small></div></section>
+  <p class="note">配送方法と送料は送料一覧ページと同じデータを参照しています。料金改定時は共通データを1か所変更すると、両方の画面へ反映されます。</p>
+</main>
+<footer class="site-footer"><div class="footer-inner"><div><a href="/about/">このサイトについて</a>　<a href="/privacy/">プライバシーポリシー</a></div><div>© <span data-current-year></span> フリマ便利ツール</div></div></footer>
+<script src="/assets/js/shipping-data.js"></script>
+<script src="/assets/js/profit.js"></script>
+<script src="/assets/js/common.js"></script>
+</body>
+</html>
