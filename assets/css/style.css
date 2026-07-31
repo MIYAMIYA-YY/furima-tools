@@ -560,3 +560,86 @@
     max-width: 220px;
   }
 }
+
+/* 宅急便・ゆうパックのサイズ別料金 */
+.shipping-price-range {
+  padding: 5px 9px;
+  border-radius: 999px;
+  background: var(--primary-soft);
+  font-size: 12px;
+  line-height: 1;
+}
+
+.size-option-heading {
+  margin: 16px 0 9px;
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.size-option-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.size-option-button {
+  min-width: 0;
+  min-height: 132px;
+  padding: 11px 7px;
+  border: 1px solid #f1b2c3;
+  border-radius: 12px;
+  background: #fff7f9;
+  color: var(--text);
+  text-align: center;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  transition: transform .16s ease, border-color .16s ease, background .16s ease;
+}
+
+.size-option-button:hover {
+  transform: translateY(-1px);
+  border-color: var(--primary);
+  background: var(--primary-soft);
+}
+
+.size-option-button strong {
+  font-size: 14px;
+}
+
+.size-option-button span {
+  font-size: 10px;
+  line-height: 1.4;
+  color: var(--muted);
+}
+
+.size-option-button small {
+  font-size: 10px;
+  color: var(--muted);
+}
+
+.size-option-button b {
+  margin-top: 3px;
+  color: var(--primary-dark);
+  font-size: 15px;
+}
+
+@media (max-width: 380px) {
+  .size-option-grid {
+    gap: 6px;
+  }
+
+  .size-option-button {
+    min-height: 126px;
+    padding: 9px 5px;
+  }
+
+  .size-option-button strong {
+    font-size: 13px;
+  }
+}
+

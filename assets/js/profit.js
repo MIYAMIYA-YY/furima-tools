@@ -34,12 +34,29 @@
     return data.marketplaces.some((marketplace) => marketplace.id === id);
   }
 
+  function flattenedMethods() {
+    return data.methods.flatMap((method) => {
+      if (!Array.isArray(method.sizeOptions)) {
+        return [{ ...method, displayName: method.name }];
+      }
+
+      return method.sizeOptions.map((option) => ({
+        id: option.id,
+        marketplaceId: method.marketplaceId,
+        carrierId: method.carrierId,
+        name: method.name,
+        displayName: `${method.name} ${option.size}（${option.sizeDescription}・${option.weight}）`,
+        price: option.price
+      }));
+    });
+  }
+
   function methodById(id) {
-    return data.methods.find((method) => method.id === id);
+    return flattenedMethods().find((method) => method.id === id);
   }
 
   function methodsForMarketplace(marketplaceId) {
-    return data.methods.filter((method) => method.marketplaceId === marketplaceId);
+    return flattenedMethods().filter((method) => method.marketplaceId === marketplaceId);
   }
 
   function renderMarketplaceOptions() {
@@ -52,7 +69,7 @@
     const methods = methodsForMarketplace(elements.marketplace.value);
     const options = [
       '<option value="none">送料なし・購入者負担（0円）</option>',
-      ...methods.map((method) => `<option value="${method.id}">${method.name}（${method.price.toLocaleString("ja-JP")}円）</option>`),
+      ...methods.map((method) => `<option value="${method.id}">${method.displayName}（${method.price.toLocaleString("ja-JP")}円）</option>`),
       '<option value="custom">宅急便・ゆうパック・その他（手入力）</option>'
     ];
     elements.shippingMethod.innerHTML = options.join("");
