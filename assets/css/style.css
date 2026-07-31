@@ -718,3 +718,150 @@
     letter-spacing: -.05em;
   }
 }
+
+/* v6: ヘッダー・ホーム・比較一覧の表示調整 */
+@media (max-width: 560px) {
+  .header-inner {
+    align-items: center;
+    flex-direction: column;
+    gap: 7px;
+    padding-top: 9px;
+    padding-bottom: 9px;
+  }
+
+  .site-brand {
+    width: 100%;
+    font-size: 14px;
+  }
+
+  .site-nav {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 5px;
+  }
+
+  .site-nav a,
+  .site-nav a:nth-child(3) {
+    display: flex;
+    min-width: 0;
+    min-height: 34px;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 3px;
+    font-size: 11px;
+    text-align: center;
+  }
+}
+
+/* スマホでも便利ツールを2列×2行で表示 */
+@media (max-width: 480px) {
+  .tool-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 9px;
+  }
+
+  .tool-card {
+    min-height: 145px;
+    padding: 14px;
+  }
+
+  .tool-card h2 { font-size: 16px; }
+  .tool-card p { font-size: 12px; }
+  .tool-icon { font-size: 24px; }
+}
+
+/* ホームのヒーローと便利ツール見出しの間隔を縮小 */
+.home .hero {
+  padding-bottom: 12px;
+}
+
+.home .hero + .section-title {
+  margin-top: 12px;
+}
+
+/* 比較一覧をサービス→配送会社の二段階で折りたたむ */
+.comparison-accordion-list {
+  display: grid;
+  gap: 10px;
+}
+
+.comparison-service-accordion,
+.comparison-carrier-accordion {
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: #fff;
+}
+
+.comparison-service-accordion {
+  box-shadow: var(--shadow);
+}
+
+.comparison-service-accordion > summary,
+.comparison-carrier-accordion > summary {
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.comparison-service-accordion > summary::-webkit-details-marker,
+.comparison-carrier-accordion > summary::-webkit-details-marker {
+  display: none;
+}
+
+.comparison-service-accordion > summary {
+  min-height: 58px;
+  padding: 13px 15px;
+  font-size: 16px;
+}
+
+.comparison-service-accordion > summary::after,
+.comparison-carrier-accordion > summary::after {
+  content: "＋";
+  color: var(--primary-dark);
+  font-weight: 800;
+}
+
+.comparison-service-accordion[open] > summary::after,
+.comparison-carrier-accordion[open] > summary::after {
+  content: "−";
+}
+
+.comparison-service-accordion > summary span,
+.comparison-carrier-accordion > summary small {
+  margin-left: auto;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.comparison-service-content {
+  display: grid;
+  gap: 8px;
+  padding: 10px;
+  border-top: 1px solid var(--border);
+  background: #fafafb;
+}
+
+.comparison-carrier-accordion > summary {
+  min-height: 48px;
+  padding: 11px 13px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.comparison-carrier-accordion[open] > summary {
+  border-bottom: 1px solid var(--border);
+}
+
+.comparison-carrier-accordion .comparison-wrap {
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.comparison-carrier-accordion .comparison-table {
+  min-width: 520px;
+}

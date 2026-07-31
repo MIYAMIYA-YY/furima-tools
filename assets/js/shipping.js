@@ -2,7 +2,7 @@
   const data = window.FURIMA_SHIPPING_DATA;
   const summary = document.getElementById("shippingSummary");
   const sections = document.getElementById("shippingSections");
-  const comparisonBody = document.getElementById("comparisonBody");
+  const comparisonSections = document.getElementById("comparisonSections");
 
   function yen(value) {
     return new Intl.NumberFormat("ja-JP").format(value) + "円";
@@ -109,7 +109,6 @@
           <h2>${escapeHtml(marketplace.name)}</h2>
           <span>${escapeHtml(marketplace.subtitle)}</span>
         </div>
-        <p class="service-guide">配送会社ごとにまとまっています。見たい項目を押すと一覧が開きます。</p>
         <div class="carrier-accordion-list">
           ${data.carriers.map((carrier) => renderCarrierGroup(marketplace, carrier)).join("")}
         </div>
@@ -133,27 +132,51 @@
   }
 
   function renderComparison() {
-    const sortedMethods = flattenMethods().sort((a, b) => {
-      const marketplaceDiff = data.marketplaces.findIndex((item) => item.id === a.marketplaceId)
-        - data.marketplaces.findIndex((item) => item.id === b.marketplaceId);
-      if (marketplaceDiff !== 0) return marketplaceDiff;
-      return data.carriers.findIndex((item) => item.id === a.carrierId)
-        - data.carriers.findIndex((item) => item.id === b.carrierId);
-    });
+    const methods = flattenMethods();
 
-    comparisonBody.innerHTML = sortedMethods.map((method) => {
-      const marketplace = data.marketplaces.find((item) => item.id === method.marketplaceId);
-      const carrier = data.carriers.find((item) => item.id === method.carrierId);
-      const weight = method.optionWeight || method.specs.find((spec) => spec.label === "重さ")?.value || "—";
+    comparisonSections.innerHTML = data.marketplaces.map((marketplace) => {
+      const marketplaceMethods = methods.filter((method) => method.marketplaceId === marketplace.id);
+
+      const carrierGroups = data.carriers.map((carrier) => {
+        const carrierMethods = marketplaceMethods.filter((method) => method.carrierId === carrier.id);
+        if (carrierMethods.length === 0) return "";
+
+        const rows = carrierMethods.map((method) => {
+          const weight = method.optionWeight || method.specs.find((spec) => spec.label === "重さ")?.value || "—";
+          return `
+            <tr>
+              <td>${escapeHtml(method.displayName)}</td>
+              <td>${yen(method.price)}</td>
+              <td>${escapeHtml(weight)}</td>
+              <td>${method.tags.includes("匿名配送") ? "○" : "—"}</td>
+            </tr>
+          `;
+        }).join("");
+
+        return `
+          <details class="comparison-carrier-accordion">
+            <summary>
+              <span>${escapeHtml(carrier.icon)} ${escapeHtml(carrier.name)}</span>
+              <small>${carrierMethods.length}件</small>
+            </summary>
+            <div class="comparison-wrap">
+              <table class="comparison-table">
+                <thead><tr><th>発送方法</th><th>送料</th><th>重さ</th><th>匿名</th></tr></thead>
+                <tbody>${rows}</tbody>
+              </table>
+            </div>
+          </details>
+        `;
+      }).join("");
+
       return `
-        <tr>
-          <td>${escapeHtml(marketplace?.name || "")}</td>
-          <td>${escapeHtml(carrier?.name || "")}</td>
-          <td>${escapeHtml(method.displayName)}</td>
-          <td>${yen(method.price)}</td>
-          <td>${escapeHtml(weight)}</td>
-          <td>${method.tags.includes("匿名配送") ? "○" : "—"}</td>
-        </tr>
+        <details class="comparison-service-accordion">
+          <summary>
+            <strong>${escapeHtml(marketplace.name)}</strong>
+            <span>${marketplaceMethods.length}件</span>
+          </summary>
+          <div class="comparison-service-content">${carrierGroups}</div>
+        </details>
       `;
     }).join("");
   }
