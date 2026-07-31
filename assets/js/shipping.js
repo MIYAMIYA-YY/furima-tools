@@ -83,13 +83,7 @@
 
     if (methods.length === 0) return "";
 
-    const officialUrl = marketplace.officialLinks?.[carrier.id];
-    const officialLink = officialUrl
-      ? `<div class="carrier-official-link"><a href="${escapeHtml(officialUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(marketplace.name)} ${escapeHtml(carrier.name)}の公式サイトへ ↗</a></div>`
-      : "";
-
     return `
-      ${officialLink}
       <details class="carrier-accordion">
         <summary class="carrier-summary">
           <span class="carrier-title-wrap">
@@ -108,9 +102,30 @@
     `;
   }
 
+  function renderOfficialLinks(marketplace) {
+    const links = data.carriers.map((carrier) => {
+      const url = marketplace.officialLinks?.[carrier.id];
+      if (!url) return "";
+
+      return `
+        <a class="service-official-button"
+           href="${escapeHtml(url)}"
+           target="_blank"
+           rel="noopener noreferrer">
+          <span>${escapeHtml(carrier.icon)}</span>
+          <strong>${escapeHtml(carrier.name)}</strong>
+          <small>公式サイトへ ↗</small>
+        </a>
+      `;
+    }).join("");
+
+    return links ? `<div class="service-official-links">${links}</div>` : "";
+  }
+
   function renderSections() {
     sections.innerHTML = data.marketplaces.map((marketplace) => `
       <section id="${marketplace.id}" class="service-section">
+        ${renderOfficialLinks(marketplace)}
         <div class="service-heading">
           <h2>${escapeHtml(marketplace.name)}</h2>
           <span>${escapeHtml(marketplace.subtitle)}</span>

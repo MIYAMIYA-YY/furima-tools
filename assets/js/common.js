@@ -6,8 +6,8 @@
   const navItems = [
     { id: "home", href: "/", label: "ホーム" },
     { id: "profit", href: "/profit/", label: "利益計算" },
-    { id: "shipping", href: "/shipping/", label: "送料一覧" },
-    { id: "reverse", href: "/reverse/", label: "利益逆算" }
+    { id: "reverse", href: "/reverse/", label: "利益逆算" },
+    { id: "shipping", href: "/shipping/", label: "送料一覧" }
   ];
 
   if (headerRoot) {

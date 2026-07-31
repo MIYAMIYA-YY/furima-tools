@@ -1136,3 +1136,97 @@ body {
     font-size: 11px;
   }
 }
+
+
+/* =========================================================
+   v10: サービス公式リンク・メニュー順の整理
+   ========================================================= */
+
+/*
+  各サービスの日本郵便系・ヤマト運輸系公式リンクは、
+  配送アコーディオンの間ではなくサービス見出しの直前にまとめる。
+*/
+.service-official-links {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin: 28px 0 8px;
+}
+
+.service-official-button {
+  min-width: 0;
+  min-height: 54px;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto auto;
+  align-items: center;
+  column-gap: 8px;
+  padding: 9px 11px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: #fff;
+  color: var(--text);
+  box-shadow: 0 4px 12px rgba(24, 31, 42, 0.06);
+  text-decoration: none;
+}
+
+.service-official-button > span {
+  grid-row: 1 / 3;
+  font-size: 19px;
+}
+
+.service-official-button strong {
+  min-width: 0;
+  overflow: hidden;
+  font-size: 13px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.service-official-button small {
+  color: var(--primary-dark);
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.service-official-button:hover {
+  border-color: #f1a8bb;
+  background: var(--primary-soft);
+}
+
+/* 古い配送会社別リンクは表示しない */
+.carrier-official-link {
+  display: none !important;
+}
+
+/*
+  公式リンクを見た後、サービス名が固定される位置まで
+  アンカー移動した際にヘッダーと重ならないようにする。
+*/
+.service-section {
+  scroll-margin-top: calc(var(--site-header-height) + 12px);
+}
+
+@media (max-width: 420px) {
+  .service-official-links {
+    gap: 6px;
+    margin-top: 22px;
+  }
+
+  .service-official-button {
+    min-height: 50px;
+    padding: 8px;
+  }
+
+  .service-official-button > span {
+    font-size: 17px;
+  }
+
+  .service-official-button strong {
+    font-size: 11px;
+  }
+
+  .service-official-button small {
+    font-size: 9px;
+  }
+}
