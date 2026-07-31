@@ -1230,3 +1230,76 @@ body {
     font-size: 9px;
   }
 }
+
+
+/* =========================================================
+   v11: サービス名と公式リンクを一体化して固定
+   ========================================================= */
+
+.service-sticky-card {
+  position: sticky;
+  top: var(--site-header-height);
+  z-index: 140;
+  margin: 24px 0 12px;
+  padding: 10px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.98);
+  box-shadow: 0 6px 18px rgba(24, 31, 42, 0.10);
+  backdrop-filter: blur(10px);
+}
+
+.service-sticky-card .service-heading {
+  position: static;
+  margin: 0 0 8px;
+  padding: 0 2px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+}
+
+.service-sticky-card .service-heading h2 {
+  font-size: 20px;
+}
+
+.service-sticky-card .service-official-links {
+  margin: 0;
+}
+
+.service-sticky-card .service-official-button {
+  min-height: 46px;
+  padding: 7px 9px;
+  box-shadow: none;
+}
+
+.service-sticky-card .service-official-button small {
+  display: block;
+}
+
+/* v9/v10の旧sticky指定を打ち消す */
+.service-section > .service-heading {
+  position: static;
+}
+
+@media (max-width: 520px) {
+  .service-sticky-card {
+    margin-top: 18px;
+    padding: 9px;
+    border-radius: 12px;
+  }
+
+  .service-sticky-card .service-heading {
+    margin-bottom: 7px;
+  }
+
+  .service-sticky-card .service-heading h2 {
+    font-size: 18px;
+  }
+
+  .service-sticky-card .service-official-button {
+    min-height: 44px;
+    padding: 6px 8px;
+  }
+}
