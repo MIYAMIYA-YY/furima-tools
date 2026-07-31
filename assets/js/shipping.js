@@ -125,16 +125,20 @@
   function renderSections() {
     sections.innerHTML = data.marketplaces.map((marketplace) => `
       <section id="${marketplace.id}" class="service-section">
-        <div class="service-sticky-card">
-          <div class="service-heading">
-            <h2>${escapeHtml(marketplace.name)}</h2>
-            <span>${escapeHtml(marketplace.subtitle)}</span>
+        <div class="service-group-card">
+          <div class="service-sticky-card">
+            <div class="service-heading">
+              <h2>${escapeHtml(marketplace.name)}</h2>
+              <span>${escapeHtml(marketplace.subtitle)}</span>
+            </div>
+            ${renderOfficialLinks(marketplace)}
           </div>
-          ${renderOfficialLinks(marketplace)}
-        </div>
 
-        <div class="carrier-accordion-list">
-          ${data.carriers.map((carrier) => renderCarrierGroup(marketplace, carrier)).join("")}
+          <div class="service-group-body">
+            <div class="carrier-accordion-list">
+              ${data.carriers.map((carrier) => renderCarrierGroup(marketplace, carrier)).join("")}
+            </div>
+          </div>
         </div>
       </section>
     `).join("");

@@ -1303,3 +1303,115 @@ body {
     padding: 6px 8px;
   }
 }
+
+
+/* =========================================================
+   v12: フリマサービス単位のグループ表示
+   ========================================================= */
+
+/*
+  メルカリ・ラクマ・Yahoo!フリマをそれぞれ1つの大きなカードにまとめる。
+  サービス名、公式リンク、配送会社アコーディオンを同じ背景内に置くことで、
+  どこまでが同じサービスなのかを視覚的に分かりやすくする。
+*/
+.service-section {
+  margin: 0 0 34px;
+}
+
+.service-section + .service-section {
+  padding-top: 10px;
+}
+
+.service-group-card {
+  position: relative;
+  overflow: visible;
+  border: 1px solid #d9dde3;
+  border-radius: 18px;
+  background: #eef1f5;
+  box-shadow: 0 9px 24px rgba(24, 31, 42, 0.08);
+}
+
+/*
+  固定見出しはグループカードの上端として見せる。
+  下側だけ少し強い境界線を入れ、本文との区切りも明確にする。
+*/
+.service-group-card .service-sticky-card {
+  margin: 0;
+  border: 0;
+  border-bottom: 1px solid #d9dde3;
+  border-radius: 17px 17px 0 0;
+  box-shadow: 0 5px 14px rgba(24, 31, 42, 0.09);
+}
+
+/* 配送会社一覧は同じグループ内の本文として余白を付ける */
+.service-group-body {
+  padding: 12px;
+}
+
+.service-group-body .carrier-accordion-list {
+  display: grid;
+  gap: 10px;
+}
+
+/*
+  各配送会社は白いカードにして、大きなサービスグループの中に
+  日本郵便系・ヤマト運輸系が含まれていることを表現する。
+*/
+.service-group-body .carrier-accordion {
+  margin: 0;
+  border-color: #d7dce3;
+  background: #fff;
+  box-shadow: 0 3px 9px rgba(24, 31, 42, 0.04);
+}
+
+/* グループが切り替わる箇所に淡い区切りを入れる */
+.service-section:not(:last-child)::after {
+  content: "";
+  display: block;
+  width: 54%;
+  height: 1px;
+  margin: 34px auto 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    #cbd1d9 18%,
+    #cbd1d9 82%,
+    transparent
+  );
+}
+
+/*
+  sticky要素が親要素内で正しく停止するよう、
+  グループの外側にはoverflowを設定しない。
+*/
+.service-section,
+.service-group-card {
+  overflow: visible;
+}
+
+@media (max-width: 520px) {
+  .service-section {
+    margin-bottom: 28px;
+  }
+
+  .service-group-card {
+    border-radius: 15px;
+  }
+
+  .service-group-card .service-sticky-card {
+    border-radius: 14px 14px 0 0;
+  }
+
+  .service-group-body {
+    padding: 9px;
+  }
+
+  .service-group-body .carrier-accordion-list {
+    gap: 8px;
+  }
+
+  .service-section:not(:last-child)::after {
+    width: 68%;
+    margin-top: 28px;
+  }
+}
