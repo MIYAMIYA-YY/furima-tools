@@ -24,6 +24,7 @@
             ${navItems.map((item) => `
               <a href="${item.href}" ${page === item.id ? 'aria-current="page"' : ''}>${item.label}</a>
             `).join("")}
+            <button class="top-button" type="button" aria-label="このページの先頭へ戻る">TOP</button>
           </nav>
         </div>
       </header>`;
@@ -45,6 +46,16 @@
   document.querySelectorAll('[data-current-year]').forEach((element) => {
     element.textContent = new Date().getFullYear();
   });
+
+  const topButton = document.querySelector(".top-button");
+  if (topButton) {
+    topButton.addEventListener("click", () => {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    });
+  }
 
   /*
     固定ヘッダーはPC・スマホで高さが変わるため、実測した高さを
