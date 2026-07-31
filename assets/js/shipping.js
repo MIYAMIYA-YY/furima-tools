@@ -21,7 +21,7 @@
     summary.innerHTML = data.marketplaces.map((marketplace) => `
       <a class="summary-chip" href="#${marketplace.id}">
         <strong>${escapeHtml(marketplace.name)}</strong>
-        <span>主な配送を見る ↓</span>
+        <span>配送方法を見る ↓</span>
       </a>
     `).join("");
   }
@@ -40,7 +40,7 @@
     return `
       <article class="shipping-method-card">
         <div class="shipping-method-head">
-          <h3 class="shipping-method-name">${escapeHtml(method.name)}</h3>
+          <h4 class="shipping-method-name">${escapeHtml(method.name)}</h4>
           <div class="shipping-price">${new Intl.NumberFormat("ja-JP").format(method.price)}<small>円</small></div>
         </div>
         <div class="shipping-tags">${tags}</div>
@@ -51,28 +51,64 @@
     `;
   }
 
-  function renderSections() {
-    sections.innerHTML = data.marketplaces.map((marketplace) => {
-      const methods = data.methods.filter((method) => method.marketplaceId === marketplace.id);
-      return `
-        <section id="${marketplace.id}" class="service-section">
-          <div class="service-heading">
-            <h2>${escapeHtml(marketplace.name)}</h2>
-            <span>${escapeHtml(marketplace.subtitle)}</span>
-          </div>
+  function renderCarrierGroup(marketplace, carrier) {
+    const methods = data.methods.filter((method) =>
+      method.marketplaceId === marketplace.id && method.carrierId === carrier.id
+    );
+
+    if (methods.length === 0) return "";
+
+    return `
+      <details class="carrier-accordion">
+        <summary class="carrier-summary">
+          <span class="carrier-title-wrap">
+            <span class="carrier-icon" aria-hidden="true">${escapeHtml(carrier.icon)}</span>
+            <span>
+              <strong>${escapeHtml(carrier.name)}</strong>
+              <small>${escapeHtml(carrier.description)}</small>
+            </span>
+          </span>
+          <span class="carrier-count">${methods.length}件</span>
+        </summary>
+        <div class="carrier-content">
           <div class="shipping-card-list">${methods.map(renderCard).join("")}</div>
-        </section>
-      `;
-    }).join("");
+        </div>
+      </details>
+    `;
+  }
+
+  function renderSections() {
+    sections.innerHTML = data.marketplaces.map((marketplace) => `
+      <section id="${marketplace.id}" class="service-section">
+        <div class="service-heading">
+          <h2>${escapeHtml(marketplace.name)}</h2>
+          <span>${escapeHtml(marketplace.subtitle)}</span>
+        </div>
+        <p class="service-guide">配送会社ごとにまとまっています。見たい項目を押すと一覧が開きます。</p>
+        <div class="carrier-accordion-list">
+          ${data.carriers.map((carrier) => renderCarrierGroup(marketplace, carrier)).join("")}
+        </div>
+      </section>
+    `).join("");
   }
 
   function renderComparison() {
-    comparisonBody.innerHTML = data.methods.map((method) => {
+    const sortedMethods = [...data.methods].sort((a, b) => {
+      const marketplaceDiff = data.marketplaces.findIndex((item) => item.id === a.marketplaceId)
+        - data.marketplaces.findIndex((item) => item.id === b.marketplaceId);
+      if (marketplaceDiff !== 0) return marketplaceDiff;
+      return data.carriers.findIndex((item) => item.id === a.carrierId)
+        - data.carriers.findIndex((item) => item.id === b.carrierId);
+    });
+
+    comparisonBody.innerHTML = sortedMethods.map((method) => {
       const marketplace = data.marketplaces.find((item) => item.id === method.marketplaceId);
+      const carrier = data.carriers.find((item) => item.id === method.carrierId);
       const weight = method.specs.find((spec) => spec.label === "重さ");
       return `
         <tr>
           <td>${escapeHtml(marketplace?.name || "")}</td>
+          <td>${escapeHtml(carrier?.name || "")}</td>
           <td>${escapeHtml(method.name)}</td>
           <td>${yen(method.price)}</td>
           <td>${escapeHtml(weight?.value || "—")}</td>

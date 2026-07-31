@@ -439,3 +439,124 @@
   border-color: var(--primary);
   box-shadow: 0 0 0 3px rgba(233, 53, 103, .13);
 }
+
+
+/* 配送会社別の折りたたみ表示 */
+.service-guide {
+  margin: -4px 4px 12px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.carrier-accordion-list {
+  display: grid;
+  gap: 10px;
+}
+
+.carrier-accordion {
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: var(--shadow);
+}
+
+.carrier-summary {
+  min-height: 72px;
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+}
+
+.carrier-summary::-webkit-details-marker { display: none; }
+
+.carrier-summary::after {
+  content: "＋";
+  flex: 0 0 auto;
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  background: var(--primary-soft);
+  color: var(--primary-dark);
+  font-size: 18px;
+  font-weight: 800;
+  transition: transform .18s ease;
+}
+
+.carrier-accordion[open] .carrier-summary::after {
+  content: "−";
+}
+
+.carrier-accordion[open] .carrier-summary {
+  border-bottom: 1px solid var(--border);
+}
+
+.carrier-title-wrap {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.carrier-icon {
+  flex: 0 0 auto;
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  background: #f5f6f8;
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.carrier-title-wrap strong {
+  display: block;
+  font-size: 16px;
+}
+
+.carrier-title-wrap small {
+  display: block;
+  margin-top: 3px;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.45;
+}
+
+.carrier-count {
+  margin-left: auto;
+  color: var(--muted);
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.carrier-content {
+  padding: 12px;
+  background: #fafafb;
+}
+
+.carrier-content .shipping-method-card {
+  box-shadow: none;
+}
+
+@media (max-width: 480px) {
+  .carrier-summary {
+    padding: 13px;
+  }
+
+  .carrier-count {
+    display: none;
+  }
+
+  .carrier-title-wrap small {
+    max-width: 220px;
+  }
+}
