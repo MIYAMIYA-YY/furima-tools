@@ -45,4 +45,23 @@
   document.querySelectorAll('[data-current-year]').forEach((element) => {
     element.textContent = new Date().getFullYear();
   });
+
+  /*
+    固定ヘッダーはPC・スマホで高さが変わるため、実測した高さを
+    CSS変数へ渡す。送料一覧の固定見出しもこの値を利用する。
+  */
+  function updateHeaderHeight() {
+    const siteHeader = document.querySelector(".site-header");
+    if (!siteHeader) return;
+
+    const height = Math.ceil(siteHeader.getBoundingClientRect().height);
+    document.documentElement.style.setProperty("--site-header-height", `${height}px`);
+  }
+
+  updateHeaderHeight();
+  window.addEventListener("resize", updateHeaderHeight);
+
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(updateHeaderHeight);
+  }
 })();

@@ -1060,3 +1060,79 @@
 @media (max-width: 380px) {
   .home .page-hero h1 { font-size: clamp(18px, 5.4vw, 21px); }
 }
+
+
+/* =========================================================
+   v9: 固定ヘッダー・送料一覧のサービス見出し固定
+   ========================================================= */
+
+:root {
+  --site-header-height: 70px;
+}
+
+/*
+  共通メニューを常に画面上部へ固定する。
+  ヘッダーの実際の高さは common.js からCSS変数へ反映する。
+*/
+.site-header {
+  position: fixed !important;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 1000;
+  width: 100%;
+}
+
+body {
+  padding-top: var(--site-header-height);
+}
+
+/*
+  送料一覧で長い配送カードを見ているときにも、
+  現在のフリマサービス名が分かるよう見出しを固定する。
+*/
+.service-section {
+  position: relative;
+  scroll-margin-top: calc(var(--site-header-height) + 58px);
+}
+
+.service-heading {
+  position: sticky;
+  top: var(--site-header-height);
+  z-index: 120;
+  align-items: center;
+  margin: 24px 0 12px;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.97);
+  box-shadow: 0 5px 14px rgba(24, 31, 42, 0.08);
+  backdrop-filter: blur(10px);
+}
+
+.service-heading h2 {
+  font-size: 20px;
+}
+
+.service-heading span {
+  text-align: right;
+}
+
+/*
+  次のサービス見出しが上へ到達すると、通常のstickyの動きで
+  前のサービス名から新しいサービス名へ自然に切り替わる。
+*/
+@media (max-width: 520px) {
+  .service-heading {
+    margin-top: 18px;
+    padding: 9px 10px;
+  }
+
+  .service-heading h2 {
+    font-size: 18px;
+  }
+
+  .service-heading span {
+    font-size: 11px;
+  }
+}
