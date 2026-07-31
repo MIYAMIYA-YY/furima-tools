@@ -83,7 +83,13 @@
 
     if (methods.length === 0) return "";
 
+    const officialUrl = marketplace.officialLinks?.[carrier.id];
+    const officialLink = officialUrl
+      ? `<div class="carrier-official-link"><a href="${escapeHtml(officialUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(marketplace.name)} ${escapeHtml(carrier.name)}の公式サイトへ ↗</a></div>`
+      : "";
+
     return `
+      ${officialLink}
       <details class="carrier-accordion">
         <summary class="carrier-summary">
           <span class="carrier-title-wrap">

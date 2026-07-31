@@ -17,17 +17,29 @@ window.FURIMA_SHIPPING_DATA = {
     {
       "id": "mercari",
       "name": "メルカリ",
-      "subtitle": "メルカリ便・全国一律"
+      "subtitle": "メルカリ便・全国一律",
+      "officialLinks": {
+        "japan_post": "https://jp-news.mercari.com/more/yuyu-mercari",
+        "yamato": "https://jp-news.mercari.com/more/rakuraku-mercari"
+      }
     },
     {
       "id": "rakuma",
       "name": "ラクマ",
-      "subtitle": "かんたんラクマパック"
+      "subtitle": "かんたんラクマパック",
+      "officialLinks": {
+        "japan_post": "https://faq.fril.jp/hc/ja/articles/39120692440589",
+        "yamato": "https://faq.fril.jp/hc/ja/articles/39120722011405"
+      }
     },
     {
       "id": "yahoo",
       "name": "Yahoo!フリマ",
-      "subtitle": "おてがる配送"
+      "subtitle": "おてがる配送",
+      "officialLinks": {
+        "japan_post": "https://support.yahoo-net.jp/SccPaypayfleamarket/s/article/H000008485",
+        "yamato": "https://support.yahoo-net.jp/SccPaypayfleamarket/s/article/H000008482"
+      }
     }
   ],
   "methods": [

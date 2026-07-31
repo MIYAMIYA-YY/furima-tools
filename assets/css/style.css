@@ -1032,3 +1032,31 @@
     padding: 4px 6px;
   }
 }
+
+
+/* v8: navigation / shipping layout refinements */
+.carrier-official-link {
+  display: flex;
+  justify-content: flex-end;
+  margin: 10px 2px 6px;
+}
+.carrier-official-link a {
+  color: var(--primary-dark);
+  font-size: 12px;
+  font-weight: 800;
+  text-decoration: none;
+}
+.carrier-official-link a:hover { text-decoration: underline; }
+
+/* ゆうパック・宅急便のサイズ選択は比較しやすい2列 */
+.size-option-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+/* ホーム見出しは1行を優先するため、長い文言だけ画面幅に合わせて縮小する。 */
+.home .page-hero h1 {
+  font-size: clamp(20px, 5.7vw, 34px);
+  white-space: nowrap;
+}
+
+@media (max-width: 380px) {
+  .home .page-hero h1 { font-size: clamp(18px, 5.4vw, 21px); }
+}

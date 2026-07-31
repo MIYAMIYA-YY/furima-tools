@@ -7,14 +7,11 @@
     { id: "home", href: "/", label: "ホーム" },
     { id: "profit", href: "/profit/", label: "利益計算" },
     { id: "shipping", href: "/shipping/", label: "送料一覧" },
-    { id: "reverse", href: "/reverse/", label: "利益逆算" },
-    { id: "about", href: "/about/", label: "サイト情報" }
+    { id: "reverse", href: "/reverse/", label: "利益逆算" }
   ];
 
   if (headerRoot) {
-    const homeBadge = page === "home"
-      ? '<span class="brand-badge">無料・登録不要</span>'
-      : '';
+    const homeBadge = '<span class="brand-badge">無料・登録不要</span>';
 
     headerRoot.innerHTML = `
       <header class="site-header">
