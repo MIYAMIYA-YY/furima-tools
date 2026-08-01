@@ -72,3 +72,14 @@ Netlifyへそのままアップロードできる静的サイトです。
 - 共通メニューをホーム・利益計算・利益逆算・送料一覧・TOPの5等分へ変更
 - TOPボタンから現在ページの先頭へスムーズに戻れるよう対応
 - 広告申請前のサイト機能・画面構成を確定
+
+
+## v1.1 SEO対応
+
+- 各ページのtitle・descriptionを検索意図に合わせて調整
+- canonical URLを全ページで確認
+- OGP（Open Graph Protocol）を追加
+- X / Twitter Cardを追加
+- JSON-LD構造化データを追加
+- sitemap.xmlへ公開中の全ページを登録
+- robots.txtからsitemap.xmlを案内
