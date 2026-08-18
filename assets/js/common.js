@@ -35,6 +35,7 @@
       <footer class="site-footer">
         <div class="footer-inner">
           <nav class="footer-nav" aria-label="サイト情報">
+            <a href="/guide/">使い方・よくある質問</a>
             <a href="/about/">このサイトについて</a>
             <a href="/privacy/">プライバシーポリシー</a>
           </nav>
