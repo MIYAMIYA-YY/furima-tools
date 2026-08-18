@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://furima-profit-calculator.netlify.app/sitemap.xml
+Sitemap: https://furima-tools.onrender.com/sitemap.xml
